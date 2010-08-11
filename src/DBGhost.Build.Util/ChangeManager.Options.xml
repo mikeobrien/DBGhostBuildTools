@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<options>
+  <option name="artifactsDirectory">
+    <![CDATA[The root directory for all artifacts. When relative paths are used for other paths this path is used as the root.]]>
+  </option>
+  <option name="templateConfigPath">
+    <![CDATA[This is the source configuration file which is use as the configuration template.]]>
+  </option>
+  <option name="processType">
+<![CDATA[ScriptDatabase: Scripts a database to files.
+
+ScriptDatabaseAndBuildDatabase: Scripts a database to files and builds a database.
+
+BuildDatabase: Builds a database.
+
+ScriptDatabaseAndBuildDatabaseAndCompare: Scripts a database to files and builds the source database and checks the target database for differences.
+
+ScriptDatabaseAndBuildDatabaseAndCompareAndCreateDelta: Scripts a database to files and builds the source database and checks the target database for differences, creating a SQL Delta of the differences.
+
+ScriptDatabaseAndBuildDatabaseAndCompareAndSynchronize: Scripts a database to files and builds the source database and looks for differences and synchronizes the target database with the newly built database.
+
+BuildDatabaseAndCompare: Builds the source database and checks the target database for differences.
+
+BuildDatabaseAndCompareAndSynchronize: Builds the source database and looks for differences and synchronizes the target database with the newly built database.
+
+CompareOnly: Looks for differences.
+
+CompareAndSynchronize: Looks for differences and synchronizes the target database with the source database.
+
+CompareAndCreateDelta: Looks for differences and creates a SQL Delta of the differences.
+
+BuildDatabaseAndCompareAndCreateDelta: Builds the source database and checks the target database for differences, creating a SQL Delta of the differences.
+
+CopyDatabase: Creates a copy of a database on a server.]]>
+  </option>
+  <option name="applicationPath">
+    <![CDATA[The path to the change manager command line application. The default is C:\Program Files\DB Ghost\ChangeManagerCmd.exe.]]>
+  </option>
+  <option name="rootDirectory">
+    <![CDATA[The root directory of all database object scripts.]]>
+  </option>
+  <option name="configPath">
+    <![CDATA[The path of the new configuration file which is based off the sourceConfigurationPath template and the values passed through the task settings. This path can be relative to artifactsDirectory.]]>
+  </option>
+  <option name="reportFile">
+    <![CDATA[The text log file. This path can be relative to artifactsDirectory.]]>
+  </option>
+  <option name="xmlReportFile">
+    <![CDATA[The XML log file. This path can be relative to artifactsDirectory. The default is DBGhost.Scripter.Report.xml.]]>
+  </option>
+  <option name="compareDeltaScript">
+    <![CDATA[The SQL delta file which will upgrade the database specified. This path can be relative to artifactsDirectory.]]>
+  </option>
+  <option name="buildScript">
+    <![CDATA[The SQL build file which will create the database from scratch. This path can be relative to artifactsDirectory.]]>
+  </option>
+  <option name="scriptSourceDBName">
+    <![CDATA[The name of the database to script.]]>
+  </option>
+  <option name="scriptSourceDBServer">
+    <![CDATA[The server on which the database to script resides.]]>
+  </option>
+  <option name="scriptSourceDBUsername">
+    <![CDATA[The username used to access the database to script.]]>
+  </option>
+  <option name="scriptSourceDBPassword">
+    <![CDATA[The password used to access the database to script.]]>
+  </option>
+  <option name="buildDBName">
+    <![CDATA[The build database name.]]>
+  </option>
+  <option name="buildDBServer">
+    <![CDATA[The build database server.]]>
+  </option>
+  <option name="buildDBUsername">
+    <![CDATA[The build database username.]]>
+  </option>
+  <option name="buildDBPassword">
+    <![CDATA[The build database password.]]>
+  </option>
+  <option name="buildDBAuthMode">
+    <![CDATA[The build database authentication mode; SQLServer or Windows.]]>
+  </option>
+  <option name="buildDBTemplateName">
+    <![CDATA[The build template database name. This database is used as a template to create the new database and must reside on the same server as the database to be built.]]>
+  </option>
+  <option name="buildDBTemplateScript">
+    <![CDATA[The build template database script is used to create the database.]]>
+  </option>
+  <option name="buildDBNoTemplate">
+    <![CDATA[No build template is used to create the database (true|false).]]>
+  </option>
+  <option name="preserveBuildDB">
+    <![CDATA[Indicates whether or not the built database should be preserved or deleted when DB Ghost is finished processing.]]>
+  </option>
+  <option name="compareSourceDBName">
+    <![CDATA[The compare source database name.]]>
+  </option>
+  <option name="compareSourceDBServer">
+    <![CDATA[The compare source database server.]]>
+  </option>
+  <option name="compareSourceDBUsername">
+    <![CDATA[The compare source database username.]]>
+  </option>
+  <option name="compareSourceDBPassword">
+    <![CDATA[The compare source database password.]]>
+  </option>
+  <option name="compareSourceDBAuthMode">
+    <![CDATA[The compare source database authentication mode; SQLServer or Windows.]]>
+  </option>
+  <option name="compareTargetDBName">
+    <![CDATA[The compare target database name.]]>
+  </option>
+  <option name="compareTargetDBServer">
+    <![CDATA[The compare target database server.]]>
+  </option>
+  <option name="compareTargetDBUsername">
+    <![CDATA[The compare target database username.]]>
+  </option>
+  <option name="compareTargetDBPassword">
+    <![CDATA[The compare target database password.]]>
+  </option>
+  <option name="compareTargetDBAuthMode">
+    <![CDATA[The compare target database authentication mode; SQLServer or Windows.]]>
+  </option>
+</options>

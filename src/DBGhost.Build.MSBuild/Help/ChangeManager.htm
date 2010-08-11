@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META http-equiv="Content-Language" content="en-ca">
+    
+    <LINK rel="stylesheet" type="text/css" href="style.css">
+    <TITLE>&lt;DBGhostChangeManager&gt; Task</TITLE>
+  </HEAD><BODY>
+    <TABLE width="100&percnt;" border="0" cellspacing="0" cellpadding="2" class="NavBar">
+      <TBODY><TR>
+        <TD class="NavBar-Cell">
+          <A href="index.htm">Task Reference</A>
+          <IMG alt="-&gt;" src="arrow.gif"> &lt;DBGhostChangeManager&gt;</TD>
+        <TD class="NavBar-Cell" align="right">
+                        v1.0</TD>
+      </TR>
+    </TBODY></TABLE>
+    <H1>&lt;DBGhostChangeManager&gt;</H1>
+    <P> DB Ghost Change Manager builds databases from individual object scripts (CREATE TABLE, CREATE PROCEDURE etc.), seamlessly handles all dependencies and highlights any syntax or broken dependency errors. It then uses the built database as the source for a compare and upgrade (synchronize) of a chosen target database. </P>
+    <H3>Parameters</H3>
+    <DIV class="table">
+        <TABLE>
+            <TBODY>
+                <TR>
+                    <TH>Attribute</TH>
+                    <TH style="text-align: center;">Type</TH>
+                    <TH>Description</TH><TH style="text-align: center;">Required</TH>
+                </TR>
+                <TR>
+                    <TD valign="top" class="required">ArtifactsFolder</TD>
+                    <TD style="text-align: center;">folder</TD>
+                    <TD>The root directory for all artifacts. When relative paths are used for other paths this path is used as the root.</TD>
+                    <TD style="text-align: center;">True</TD>
+                </TR>
+                <TR>
+                    <TD valign="top" class="required">TemplateConfigurationPath</TD>
+                    <TD style="text-align: center;">file</TD>
+                    <TD>This is the source configuration file which is use as the configuration template.</TD>
+                    <TD style="text-align: center;">True</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">ProcessType</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>
+                        <b>ScriptDatabase</b> - Scripts a database to files.<br/>
+                        <b>ScriptDatabaseAndBuildDatabase</b> - Scripts a database to files and builds a database.<br/>
+                        <b>ScriptDatabaseAndBuildDatabaseAndCompare</b> - Scripts a database to files and builds the source database and checks the target database for differences.<br/>
+                        <b>ScriptDatabaseAndBuildDatabaseAndCompareAndCreateDelta</b> - Scripts a database to files and builds the source database and checks the target database for differences, creating a SQL Delta of the differences.<br/>
+                        <b>ScriptDatabaseAndBuildDatabaseAndCompareAndSynchronize</b> - Scripts a database to files and builds the source database and looks for differences and synchronizes the target database with the newly built database<br/>
+                        <b>BuildDatabase</b> - Builds a database.<br/>
+                        <b>BuildDatabaseAndCompare</b> - Builds the source database and checks the target database for differences. <br/>
+                        <b>BuildDatabaseAndCompareAndSynchronize</b> - builds the source database and looks for differences and synchronizes the target database with the newly built database.<br/>
+                        <b>BuildDatabaseAndCompareAndCreateDelta</b> - Builds the source database and checks the target database for differences, creating a SQL Delta of the differences.<br/>
+                        <b>CompareOnly</b> - Looks for differences.<br/>
+                        <b>CompareAndSynchronize</b> - Looks for differences and synchronizes the target database with the source database.<br/>
+                        <b>CompareAndCreateDelta</b> - Looks for differences and creates a SQL Delta of the differences.<br/>
+                        <b>CopyDatabase</b> - Creates a copy of a database on a server.<br/>
+                    </TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">ApplicationPath</TD>
+                    <TD style="text-align: center;">file</TD>
+                    <TD>The path to the change manager command line application. The default is C:\Program Files\DB Ghost\ChangeManagerCmd.exe.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">RootFolder</TD>
+                    <TD style="text-align: center;">folder</TD>
+                    <TD>The root directory of all database object scripts.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">ConfigurationPath</TD>
+                    <TD style="text-align: center;">file</TD>
+                    <TD>The path of the new configuration file which is based off the sourceConfigurationPath template and the values passed through the task settings. This path can be relative to artifactsDirectory.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">ReportFilePath</TD>
+                    <TD style="text-align: center;">file</TD>
+                    <TD>The text log file. This path can be relative to artifactsDirectory.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">XmlReportFilePath</TD>
+                    <TD style="text-align: center;">file</TD>
+                    <TD>The XML log file. This path can be relative to artifactsDirectory. The default is DBGhost.Scripter.Report.xml.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareDeltaScript</TD>
+                    <TD style="text-align: center;">file</TD>
+                    <TD>The SQL delta file which will upgrade the database specified. This path can be relative to artifactsDirectory.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">BuildScript</TD>
+                    <TD style="text-align: center;">file</TD>
+                    <TD>The SQL build file which will create the database from scratch. This path can be relative to artifactsDirectory.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">ScriptSourceDatabaseName</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The name of the database to script.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">ScriptSourceDatabaseServer</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The server on which the database to script resides.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">ScriptSourceDatabaseUsername</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The username used to access the database to script.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">ScriptSourceDatabasePassword</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The password used to access the database to script.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">BuildDatabaseName</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The build database name.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">BuildDatabaseServer</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The build database server.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">BuildDatabaseUsername</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The build database username.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">BuildDatabasePassword</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The build database password.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">BuildDatabaseAuthenticationMode</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The build database authentication mode; <b>SQLServer</b> or <b>Windows</b>.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">BuildDatabaseTemplateName</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The build template database name. This database is used as a template to create the new database and must reside on the same server as the database to be built.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">BuildDatabaseTemplateScript</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The build template database script is used to create the database.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+				<TR>
+					<TD valign="top">BuildDatabaseNoTemplate</TD>
+					<TD style="text-align: center;">string</TD>
+					<TD>No build template is used to create the database (true|false).</TD>
+					<TD style="text-align: center;">False</TD>
+				</TR>
+                <TR>
+                    <TD valign="top">PreserveBuildDatabase</TD>
+                    <TD style="text-align: center;">bool</TD>
+                    <TD>Indicates whether or not the built database should be preserved or deleted when DB Ghost is finished processing.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareSourceDatabaseName</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare source database name.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareSourceDatabaseServer</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare source database server.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareSourceDatabaseUsername</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare source database username.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareSourceDatabasePassword</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare source database password.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareSourceDatabaseAuthenticationMode</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare source database authentication mode; <b>SQLServer</b> or <b>Windows</b>.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareTargetDatabaseName</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare target database name.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareTargetDatabaseServer</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare target database server.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareTargetDatabaseUsername</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare target database username.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareTargetDatabasePassword</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare target database password.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+                <TR>
+                    <TD valign="top">CompareTargetDatabaseAuthenticationMode</TD>
+                    <TD style="text-align: center;">string</TD>
+                    <TD>The compare target database authentication mode; <b>SQLServer</b> or <b>Windows</b>.</TD>
+                    <TD style="text-align: center;">False</TD>
+                </TR>
+
+            </TBODY>
+        </TABLE>
+    </DIV>
+    
+    
+    <H3>Examples</H3>
+    <UL class="examples">
+      <LI>
+        <P> Sync a database with source scripts and save the new config, report and sql files to the artifacts folder. The rest of the configuration is set in the source configuration file. </P>
+        <PRE class="code">
+    &lt;Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
+        &lt;UsingTask TaskName="DBGhost.Build.MSBuild.ChangeManager.DBGhostChangeManager" 
+                   AssemblyFile="[AssemblyPath]\DBGhost.Build.MSBuild.dll" /&gt;
+        &lt;Target Name="MyTarget"&gt;
+            &lt;DBGhostChangeManager
+                    ProcessType = "BuildDatabaseAndCompareAndSynchronize"
+                    TemplateConfigurationPath = "D:\Source\Database\ChangeManager.config"
+                    ArtifactsFolder = "D:\Build\Artifacts"
+                    ConfigurationPath = "ChangeManager.DBGhost.config"
+                    RootFolder = "D:\Source\Database"
+                    CompareSourceDatabaseName = "MyDatabase"
+                    CompareSourceDatabaseServer = "MySqlServer"
+                    CompareSourceDatabaseAuthenticationMode = "Windows"
+                    CompareTargetDatabaseName = "MyDatabase"
+                    CompareTargetDatabaseServer = "MySqlServer"
+                    CompareTargetDatabaseAuthenticationMode = "Windows"
+                    ReportFilePath = "ChangeManager.DBGhost.Report.txt"
+                    XmlReportFilePath = "ChangeManager.DBGhost.Report-results.xml"
+                    BuildScript = "MyDatabase.Build.sql"
+                    CompareDeltaScript = "MyDatabase.Delta.sql" /&gt;
+                    ContinueOnError="true"&gt;
+                &lt;Output TaskParameter="Error"
+                    PropertyName="DBGhostError" /&gt;
+            &lt;/DBGhostChangeManager&gt;
+            &lt;Message Text="Doing other tasks..."/&gt;
+            &lt;Error Condition="$(DBGhostError)" 
+                Text="There was a DB Ghost error."/&gt;      
+        &lt;/Target&gt;
+    &lt;/Project>    
+    </PRE>
+      </LI>
+    </UL>
+    <H3>Requirements</H3>
+    <DIV style="margin-left: 20px;">
+      <B>Assembly:</B> DBGhost.Build.MSBuild (1.0.0.0)
+            </DIV>
+  
+</BODY></HTML>

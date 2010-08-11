@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='Windows-1252'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+
+  <Product 
+    Name='DB Ghost Build Tools' 
+    UpgradeCode='216E503F-C50E-41D5-88E1-4B44A95AB9DF' 
+    Id='BF3E1F38-B0DB-4973-85A0-5DC77806DD8A' 
+    Language='1033' 
+    Manufacturer='Innovartis Ltd.' 
+    Version='1.0'>
+    
+    <Package Keywords='Installer'
+			  Description="DB Ghost Build Tools Installer"
+			  Comments='DB Ghost Build Tools' Manufacturer='Innovartis Ltd.'
+			  InstallerVersion='150' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+
+    <Property Id="ALLUSERS">1</Property>
+
+    <Property Id="NET_FRAMEWORK_INSTALLED">
+      <RegistrySearch Id='e4e76d1da7' Type='raw'
+			  Root='HKLM' Key='SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5' Name='Install' />
+    </Property>
+
+    <Condition Message=".NET Framework 3.5 is not installed. Please install it and try again.">
+      Installed OR (NET_FRAMEWORK_INSTALLED = "#1" AND NOT Installed)
+    </Condition>
+
+    <Media Id='1' Cabinet='DBGhostBuildTools.cab' EmbedCab='yes' />
+
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="DB Ghost Build Tools" />
+      </Directory>
+
+      <Directory Id='ProgramFilesFolder' Name='Program Files'>
+
+        <Directory Id ='INSTALLDIR' Name='DB Ghost Build Tools'>
+          
+          <Directory Id='NANTTASKSINSTALLDIR' Name='NAnt Tasks'>
+
+            <Component Id='DBGhostNAntTasks' Guid='48D8AA89-1483-4FDC-98E9-477769CCF20F'>
+              <File 
+                Id='baa5856206' 
+                Name='DBGhost.Build.NAnt.dll' 
+                DiskId='1' 
+                Source='..\DBGhost.Build.NAnt\bin\Release\DBGhost.Build.NAnt.dll' 
+                Vital='yes'/>
+              <File
+                Id='c75ae8a9e4'
+                Name='DBGhost.Build.dll'
+                DiskId='1'
+                Source='..\DBGhost.Build\bin\Release\DBGhost.Build.dll'
+                Vital='yes'/>
+            </Component>
+
+          </Directory>
+          
+          <Directory Id ='NANTTASKSHELPDIR' Name='NAnt Tasks Documentation'>
+            <Component Id='NAntTasksHelpDocs' Guid='FD065963-865B-43E0-AE25-24AC532F9EA0'>
+              <File Id='cfd55657d1' Name='Index.htm' DiskId='1' Source='..\DBGhost.Build.NAnt\Help\Index.htm' Vital='yes'>
+                <Shortcut Id="d2fc5f4cee" Directory="ProgramMenuDir" Name="NAnt Task Documentation" WorkingDirectory='INSTALLDIR'  />
+              </File>
+
+              <File Id='ba82af2ba2' Name='arrow.gif' DiskId='1' Source='..\DBGhost.Build.NAnt\Help\arrow.gif' Vital='yes'/>
+              <File Id="cc8f884355" Name="style.css" DiskId="1" Source="..\DBGhost.Build.NAnt\Help\style.css" Vital="yes" />
+              <File Id="a963a47349" Name="ChangeManager.htm" DiskId="1" Source="..\DBGhost.Build.NAnt\Help\ChangeManager.htm" Vital="yes" />
+            </Component>
+          </Directory>
+
+          <Directory Id='MSBUILDTASKSINSTALLDIR' Name='MS Build Tasks'>
+            <Component Id='DBGhostMSBuildTasks' Guid='8A6C0A52-667F-46EE-8078-16E16AD1AD37'>
+            <File
+              Id='b56f52e465'
+              Name='DBGhost.Build.MSBuild.dll'
+              DiskId='1'
+              Source='..\DBGhost.Build.MSBuild\bin\Release\DBGhost.Build.MSBuild.dll'
+              Vital='yes'/>
+            <File
+              Id='d5bb0bc9f9'
+              Name='DBGhost.Build.dll'
+              DiskId='1'
+              Source='..\DBGhost.Build\bin\Release\DBGhost.Build.dll'
+              Vital='yes'/>
+          </Component>
+        </Directory>
+
+        <Directory Id ='MSBUILDTASKSHELPDIR' Name='MS Build Tasks Documentation'>
+          <Component Id='MSBuildTasksHelpDocs' Guid='6E9C853C-EB1A-4E76-962B-0F815D87DE63'>
+            <File Id='a83115b15e' Name='Index.htm' DiskId='1' Source='..\DBGhost.Build.MSBuild\Help\Index.htm' Vital='yes'>
+              <Shortcut Id="abaabdf069" Directory="ProgramMenuDir" Name="MS Build Task Documentation" WorkingDirectory='INSTALLDIR'  />
+            </File>
+
+            <File Id='b4d2f7b819' Name='arrow.gif' DiskId='1' Source='..\DBGhost.Build.MSBuild\Help\arrow.gif' Vital='yes'/>
+            <File Id="df9e49694e" Name="style.css" DiskId="1" Source="..\DBGhost.Build.MSBuild\Help\style.css" Vital="yes" />
+            <File Id="e5b3aa1ee9" Name="ChangeManager.htm" DiskId="1" Source="..\DBGhost.Build.MSBuild\Help\ChangeManager.htm" Vital="yes" />
+          </Component>
+        </Directory>
+
+          <Component Id='DBGhostBuiltUtil' Guid='CE14CE08-33A1-4304-A747-CD1DD5655268'>
+            <File
+              Id='b6000cdabc'
+              Name='DBGhost.Build.Util.exe'
+              DiskId='1'
+              Source='..\DBGhost.Build.Util\bin\Release\DBGhost.Build.Util.exe'
+              Vital='yes'/>
+            <File
+              Id='e19c9eab5b'
+              Name='DBGhost.Build.dll'
+              DiskId='1'
+              Source='..\DBGhost.Build\bin\Release\DBGhost.Build.dll'
+              Vital='yes'/>
+          </Component>
+
+        </Directory>
+        
+      </Directory>
+    </Directory>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_FeatureTree" />
+
+    <Icon Id="InstallerIcon" SourceFile="Resources\Installer.ico" />
+    <Property Id="ARPPRODUCTICON" Value="InstallerIcon" />
+
+    <Feature 
+        Id='bda3a56ffa' 
+        Level='1' 
+        Title='NAnt Tasks' 
+        Description='Installs the DBGhost NAnt Tasks. NOTE: You must set the install path for the tasks to be the NAnt tasks folder (IE: &quot;&lt;nant&gt;\bin\tasks&quot;).'
+        ConfigurableDirectory='NANTTASKSINSTALLDIR'>
+      <ComponentRef Id='DBGhostNAntTasks'/>
+    </Feature>
+    
+    <Feature
+        Id='d99e9930cb'
+        Level='1'
+        Title='NAnt Tasks Documentation'
+        Description='Installs the DBGhost NAnt Tasks documentation'
+        ConfigurableDirectory='INSTALLDIR'>
+      <ComponentRef Id='NAntTasksHelpDocs'/>
+    </Feature>
+
+    <Feature
+        Id='aa4e1ec185'
+        Level='1'
+        Title='MS Build Tasks'
+        Description='Installs the DBGhost MS Build Tasks.'
+        ConfigurableDirectory='MSBUILDTASKSINSTALLDIR'>
+      <ComponentRef Id='DBGhostMSBuildTasks'/>
+    </Feature>
+
+    <Feature
+        Id='add3239d39'
+        Level='1'
+        Title='MS Build Tasks Documentation'
+        Description='Installs the DBGhost MS Build Tasks documentation'
+        ConfigurableDirectory='INSTALLDIR'>
+      <ComponentRef Id='MSBuildTasksHelpDocs'/>
+    </Feature>
+    
+    <Feature
+        Id='c676e4f0e1'
+        Level='1'
+        Title='Build Utility'
+        Description='Installs the DBGhost Build Utility'
+        ConfigurableDirectory='INSTALLDIR'>
+      <ComponentRef Id='DBGhostBuiltUtil'/>
+    </Feature>
+
+  </Product>
+</Wix>
