@@ -25,14 +25,13 @@ namespace DbGhost.Build.Reports
             var formatterResult = formatter.Load(reportPath);
             var configuration = XDocument.Load(configurationPath);
 
-            var report = new XDocument(
+            _report = new XDocument(
                 new XElement(
                     "dbGhost",
                     new XAttribute("errors", formatterResult.HasErrors),
                     formatterResult.Report.Elements(),
                     configuration.Elements()));
 
-            _report = report;
             _hasErrors = formatterResult.HasErrors;
         }
     }

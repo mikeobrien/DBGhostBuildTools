@@ -18,11 +18,18 @@ namespace DbGhost.Build.ChangeManager
 
         public bool Run()
         {
-            string buildDatabaseTemplateScript = EnsureBuildDatabaseScript(_parameters);
-
-            Configuration configuration = LoadConfiguration(_parameters);
-            string xmlReportPath = _parameters.XmlReportFilePath.EnsureAbsolutePath(
+            var configuration = LoadConfiguration(_parameters);
+            var xmlReportPath = _parameters.XmlReportFilePath.EnsureAbsolutePath(
                 _parameters.ArtifactsDirectory);
+
+            return configuration.ProcessType == Parameters.ProcessType.GenerateXmlReport ? 
+                GenerateReport(configuration, xmlReportPath) : 
+                RunChangeManager(configuration, xmlReportPath);
+        }
+
+        private bool RunChangeManager(Configuration configuration, string xmlReportPath)
+        {
+            var buildDatabaseTemplateScript = EnsureBuildDatabaseScript(_parameters);
 
             // Persist the custom configuration file
             configuration.Save();
@@ -39,15 +46,15 @@ namespace DbGhost.Build.ChangeManager
                         UseShellExecute = false
                     };
 
-            Process process = Process.Start(processInfo);
+            var process = Process.Start(processInfo);
             process.WaitForExit();
 
             if (buildDatabaseTemplateScript != null && File.Exists(buildDatabaseTemplateScript))
                 File.Delete(buildDatabaseTemplateScript);
 
+            // Convert the text report to xml
             if (File.Exists(configuration.ReportPath))
             {
-                // Convert the text report to xml
                 var report = new Report(
                     configuration.ReportPath,
                     new ReportFormatter(),
@@ -55,9 +62,21 @@ namespace DbGhost.Build.ChangeManager
 
                 report.Save(xmlReportPath);
 
-                return (!report.HasErrors);
+                return GenerateReport(configuration, xmlReportPath);
             }
             return false;
+        }
+
+        private static bool GenerateReport(Configuration configuration, string xmlReportPath)
+        {
+            var report = new Report(
+                configuration.ReportPath,
+                new ReportFormatter(),
+                configuration.ConfigurationPath);
+
+            report.Save(xmlReportPath);
+
+            return (!report.HasErrors);
         }
 
         private static string EnsureBuildDatabaseScript(Parameters parameters)
@@ -71,8 +90,8 @@ namespace DbGhost.Build.ChangeManager
                 parameters.ProcessMode == Parameters.ProcessType.BuildDatabaseAndCompareAndCreateDelta ||
                 parameters.ProcessMode == Parameters.ProcessType.BuildDatabaseAndCompareAndSynchronize))
             {
-                string name = Guid.NewGuid().ToString();
-                string path = name.EnsureAbsolutePath(parameters.ArtifactsDirectory);
+                var name = Guid.NewGuid().ToString();
+                var path = name.EnsureAbsolutePath(parameters.ArtifactsDirectory);
                 parameters.BuildDatabaseTemplateScript = path;
                 parameters.CompareSourceDatabase.Name = name;
                 parameters.BuildDatabaseTemplateName = parameters.CompareTargetDatabase.Name;
@@ -92,8 +111,8 @@ namespace DbGhost.Build.ChangeManager
             var configuration =
                 new Configuration(parameters.TemplateConfigurationPath);
 
-            configuration.ProcessType = 
-                configuration.ProcessType.Coalesce(parameters.ProcessMode);
+            configuration.ProcessTypeString = 
+                configuration.ProcessTypeString.Coalesce(parameters.ProcessMode);
 
             configuration.RootDirectory = 
                 configuration.RootDirectory.Coalesce(parameters.RootDirectory);

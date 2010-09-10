@@ -6,7 +6,7 @@ namespace DbGhost.Build.Extensions
 {
     public static class StringExtensions
     {
-        public static bool StartsWithAny(this string value, string[] values, StringComparison comparisonType)
+        public static bool StartsWithAny(this string value, StringComparison comparisonType, params string[] values)
         {
             return value != null && values.Any(comparand => value.StartsWith(comparand, comparisonType));
         }

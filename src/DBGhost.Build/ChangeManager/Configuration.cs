@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 using System.IO;
 using DbGhost.Build.Extensions;
@@ -16,12 +17,18 @@ namespace DbGhost.Build.ChangeManager
             _configuration.Load(path);
         }
 
-        public string ProcessType
+        public string ProcessTypeString
         {
             get { return _configuration.GetValue(XPath.ChangeProcessType); }
             set { _configuration.SetValue(XPath.ChangeProcessType, value); }
         }
-        
+
+        public Parameters.ProcessType ProcessType
+        {
+            get { return (Parameters.ProcessType)Enum.Parse(typeof(Parameters.ProcessType), ProcessTypeString); }
+            set { ProcessTypeString = value.ToString(); }
+        }
+
         public string RootDirectory
         {
             get { return _configuration.GetValue(XPath.ChangeRootDir); }

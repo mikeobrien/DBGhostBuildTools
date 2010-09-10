@@ -74,16 +74,15 @@ namespace DbGhost.Build.ChangeManager
             converter.AddBoundary(
                 new Boundary(
                     "compare",
-                    e => e.StartsWith("DB Ghost ChangeManager") || e.StartsWith("DB Ghost Change Manager") || e.StartsWith("Innovartis.DBGhost.ChangeManagerCmd"),
+                    e => e.StartsWithAny(StringComparison.OrdinalIgnoreCase, "DB Ghost ChangeManager", "DB Ghost Change Manager", "Innovartis.DBGhost.ChangeManagerCmd", "Running (DB Ghost Change Manager)"),
                     e => (e.StartsWith("DB Ghost Change Manager") || e.StartsWith("Innovartis.DBGhost.ChangeManagerCmd")) && 
                         e.Contains("complete"),
                     new List<Boundary> { 
                         new Boundary(
                             "object", 
-                            e => e.StartsWithAny(
-                                new [] {"Created", "Altered", "Inserted", "Deleted", "Added", 
-                                                "Updated", "Modified", "Dropped", "Renamed", "Delta file"}, 
-                                StringComparison.OrdinalIgnoreCase)),
+                            e => e.StartsWithAny(StringComparison.OrdinalIgnoreCase,
+                                                 "Created", "Altered", "Inserted", "Deleted", "Added", 
+                                                 "Updated", "Modified", "Dropped", "Renamed", "Delta file")),
                         errorBoundary,
                         warningBoundary
                     }));
