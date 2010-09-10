@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBGhost.Build", "DBGhost.Build\DBGhost.Build.csproj", "{C16FAB6D-556E-4D69-B713-197E51E0BF27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbGhost.Build", "DBGhost.Build\DbGhost.Build.csproj", "{C16FAB6D-556E-4D69-B713-197E51E0BF27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBGhost.Build.NAnt", "DBGhost.Build.NAnt\DBGhost.Build.NAnt.csproj", "{DABE999E-97E3-4CB4-A576-38A30163A70C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbGhost.Build.NAnt", "DBGhost.Build.NAnt\DbGhost.Build.NAnt.csproj", "{DABE999E-97E3-4CB4-A576-38A30163A70C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBGhost.Build.MSBuild", "DBGhost.Build.MSBuild\DBGhost.Build.MSBuild.csproj", "{51C49782-8539-4CD9-946C-80FF618211DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbGhost.Build.MSBuild", "DBGhost.Build.MSBuild\DbGhost.Build.MSBuild.csproj", "{51C49782-8539-4CD9-946C-80FF618211DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBGhost.Build.Util", "DBGhost.Build.Util\DBGhost.Build.Util.csproj", "{C982665F-776B-4AEF-8993-3E5872C36072}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbGhost.Build.Util", "DBGhost.Build.Util\DbGhost.Build.Util.csproj", "{C982665F-776B-4AEF-8993-3E5872C36072}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer\Installer.wixproj", "{92430C13-0049-4BC4-9F5F-3D7C3E7C4516}"
 	ProjectSection(ProjectDependencies) = postProject

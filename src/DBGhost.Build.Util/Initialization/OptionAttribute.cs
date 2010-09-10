@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using DBGhost.Build.Extensions;
+using DbGhost.Build.Extensions;
 
-namespace DBGhost.Build.Util.Initialization
+namespace DbGhost.Build.Util.Initialization
 {
     internal class OptionAttribute : Attribute 
     {
         // ────────────────────────── Private Fields ──────────────────────────
 
-        private static Dictionary<string, XDocument> _documents = 
+        private static readonly Dictionary<string, XDocument> Documents = 
             new Dictionary<string, XDocument>();
 
         // ────────────────────────── Constructors ──────────────────────────
@@ -32,17 +29,17 @@ namespace DBGhost.Build.Util.Initialization
 
             XDocument document;
 
-            if (!_documents.ContainsKey(xmlResourceName))
+            if (!Documents.ContainsKey(xmlResourceName))
             {
-                Stream documentStream =
+                var documentStream =
                     Assembly.GetExecutingAssembly().FindManifestResourceStream(xmlResourceName);
                 document = XDocument.Load(new XmlTextReader(documentStream));
-                _documents.Add(xmlResourceName, document);
+                Documents.Add(xmlResourceName, document);
             }
             else
-                document = _documents[xmlResourceName];
+                document = Documents[xmlResourceName];
 
-            XElement descriptionElement = 
+            var descriptionElement = 
                 document.XPathSelectElement(string.Format(descriptionXPath.Replace("{name}", "{0}"), name));
             Description = descriptionElement != null ? descriptionElement.Value.Trim() : string.Empty;
         }

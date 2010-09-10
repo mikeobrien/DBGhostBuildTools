@@ -8,8 +8,8 @@
     <ProjectGuid>{DABE999E-97E3-4CB4-A576-38A30163A70C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DBGhost.Build.NAnt</RootNamespace>
-    <AssemblyName>DBGhost.Build.NAnt</AssemblyName>
+    <RootNamespace>DbGhost.Build.NAnt</RootNamespace>
+    <AssemblyName>DbGhost.Build.NAnt</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -71,7 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeManager.Task.cs" />
+    <Compile Include="ChangeManager\Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,9 +79,9 @@
     <Content Include="Help\Index.htm" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DBGhost.Build\DBGhost.Build.csproj">
+    <ProjectReference Include="..\DBGhost.Build\DbGhost.Build.csproj">
       <Project>{C16FAB6D-556E-4D69-B713-197E51E0BF27}</Project>
-      <Name>DBGhost.Build</Name>
+      <Name>DbGhost.Build</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -8,8 +8,8 @@
     <ProjectGuid>{C16FAB6D-556E-4D69-B713-197E51E0BF27}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DBGhost.Build</RootNamespace>
-    <AssemblyName>DBGhost.Build</AssemblyName>
+    <RootNamespace>DbGhost.Build</RootNamespace>
+    <AssemblyName>DbGhost.Build</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -67,22 +67,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions.AssemblyExtensions.cs" />
-    <Compile Include="ChangeManager.Application.cs" />
-    <Compile Include="ChangeManager.Configuration.cs" />
-    <Compile Include="ChangeManager.Parameters.cs" />
-    <Compile Include="ChangeManager.ReportFormatter.cs" />
+    <Compile Include="ChangeManager\ConfigurationXPath.cs" />
+    <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="ChangeManager\Application.cs" />
+    <Compile Include="ChangeManager\Configuration.cs" />
+    <Compile Include="ChangeManager\Parameters.cs" />
+    <Compile Include="ChangeManager\ReportFormatter.cs" />
     <Compile Include="EventHandler.cs" />
-    <Compile Include="Extensions.MiscExtensions.cs" />
-    <Compile Include="Extensions.StringExtensions.cs" />
+    <Compile Include="Extensions\GenericExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\XDocumentExtensions.cs" />
+    <Compile Include="Extensions\XElementExtensions.cs" />
+    <Compile Include="Extensions\XmlDocumentExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports.FormatterResult.cs" />
-    <Compile Include="Reports.IReportFormatter.cs" />
-    <Compile Include="Reports.Report.cs" />
-    <Compile Include="Reports.Text.Boundary.cs" />
-    <Compile Include="Reports.Text.Converter.cs" />
-    <Compile Include="Reports.Text.Entry.cs" />
-    <Compile Include="Reports.Text.Reader.cs" />
+    <Compile Include="Reports\FormatterResult.cs" />
+    <Compile Include="Reports\IReportFormatter.cs" />
+    <Compile Include="Reports\Report.cs" />
+    <Compile Include="Reports\Text\Boundary.cs" />
+    <Compile Include="Reports\Text\Converter.cs" />
+    <Compile Include="Reports\Text\Entry.cs" />
+    <Compile Include="Reports\Text\Reader.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DropAndCreateDatabase.sql" />

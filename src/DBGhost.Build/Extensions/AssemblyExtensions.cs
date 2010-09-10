@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.IO;
 using System.Reflection;
 
-namespace DBGhost.Build.Extensions
+namespace DbGhost.Build.Extensions
 {
     public static class AssemblyExtensions
     {
         public static Stream FindManifestResourceStream(this Assembly assembly, string name)
         {
-            string[] names = assembly.GetManifestResourceNames();
+            var names = assembly.GetManifestResourceNames();
             if (name != null && names.Length > 0)
             {
-                string resourceName = names.OrderByDescending(n => n.Length).
+                var resourceName = names.OrderByDescending(n => n.Length).
                     FirstOrDefault(n => n.EndsWith(name));
                 if (!string.IsNullOrEmpty(resourceName))
                     return assembly.GetManifestResourceStream(resourceName);

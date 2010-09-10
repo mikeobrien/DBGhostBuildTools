@@ -1,29 +1,19 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 
-namespace DBGhost.Build.Extensions
+namespace DbGhost.Build.Extensions
 {
     public static class StringExtensions
     {
         public static bool StartsWithAny(this string value, string[] values, StringComparison comparisonType)
         {
-            if (value == null) return false;
-            foreach (string comparand in values)
-                if (value.StartsWith(comparand, comparisonType)) return true;
-            return false;
+            return value != null && values.Any(comparand => value.StartsWith(comparand, comparisonType));
         }
 
         public static bool IsNullOrEmpty(this string value, bool ignoreWhitespace)
         {
-            if (value != null)
-            {
-                return IsEmpty(value, ignoreWhitespace);
-            }
-            return true;
+            return value == null || IsEmpty(value, ignoreWhitespace);
         }
 
         public static bool IsEmpty(this string value, bool ignoreWhitespace)
@@ -41,25 +31,22 @@ namespace DBGhost.Build.Extensions
         {
             if (value != null)
             {
-                if (Path.IsPathRooted(value))
-                    return value;
-                else
-                    return Path.GetFullPath(Path.Combine(path, value));
+                return Path.IsPathRooted(value) ? value : Path.GetFullPath(Path.Combine(path, value));
             }
             return null;
         }
 
         public static string ToRelativePath(this string root, string path)
         {
-            if (path.StartsWith(root, StringComparison.OrdinalIgnoreCase))
-                return path.Substring(root.Length);
-            else
-                return path;
+            return path.StartsWith(root, StringComparison.OrdinalIgnoreCase) ? path.Substring(root.Length) : path;
         }
 
         public static string GetParentDirectoryName(this string path)
         {
-            string[] folders = Path.GetDirectoryName(path).Split(new char[] {Path.DirectorySeparatorChar});
+            var directory = Path.GetDirectoryName(path);
+            if (directory == null) return null;
+
+            var folders = directory.Split(new[] {Path.DirectorySeparatorChar});
             return folders[folders.GetUpperBound(0)];
         }
 
@@ -68,12 +55,9 @@ namespace DBGhost.Build.Extensions
             return (T)Enum.Parse(typeof(T), value);
         }
 
-        public static string Coalesce<T>(this string value, Nullable<T> newValue) where T : struct
+        public static string Coalesce<T>(this string value, T? newValue) where T : struct
         {
-            if (newValue.HasValue)
-                return newValue.Value.ToString();
-            else
-                return value;
+            return newValue.HasValue ? newValue.Value.ToString() : value;
         }
     }
 }

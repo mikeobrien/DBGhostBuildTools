@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace DBGhost.Build.Util.Initialization
+namespace DbGhost.Build.Util.Initialization
 {
     internal class OptionGroupAttribute : Attribute 
     {

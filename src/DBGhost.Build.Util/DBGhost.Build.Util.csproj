@@ -8,8 +8,8 @@
     <ProjectGuid>{C982665F-776B-4AEF-8993-3E5872C36072}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DBGhost.Build.Util</RootNamespace>
-    <AssemblyName>DBGhost.Build.Util</AssemblyName>
+    <RootNamespace>DbGhost.Build.Util</RootNamespace>
+    <AssemblyName>DbGhost.Build.Util</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>ChangeManager.ico</ApplicationIcon>
@@ -68,16 +68,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeManager.Options.cs" />
-    <Compile Include="Initialization.OptionAttribute.cs" />
-    <Compile Include="Initialization.OptionGroupAttribute.cs" />
+    <Compile Include="ChangeManager\Options.cs" />
+    <Compile Include="Initialization\OptionAttribute.cs" />
+    <Compile Include="Initialization\OptionGroupAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DBGhost.Build\DBGhost.Build.csproj">
+    <ProjectReference Include="..\DBGhost.Build\DbGhost.Build.csproj">
       <Project>{C16FAB6D-556E-4D69-B713-197E51E0BF27}</Project>
-      <Name>DBGhost.Build</Name>
+      <Name>DbGhost.Build</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -85,10 +85,10 @@
     <EmbeddedResource Include="ChangeManager.Options.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Initialization.OptionLoader.cs" />
+    <Compile Include="Initialization\OptionLoader.cs" />
     <Compile Include="Options.cs" />
-    <Compile Include="Initialization.OptionWriter.cs" />
-    <Compile Include="Initialization.Options.cs" />
+    <Compile Include="Initialization\OptionWriter.cs" />
+    <Compile Include="Initialization\Options.cs" />
     <Compile Include="Runtime.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>
