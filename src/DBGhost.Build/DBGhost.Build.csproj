@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeManager\ConfigurationBuilder.cs" />
     <Compile Include="ChangeManager\ConfigurationXPath.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
     <Compile Include="ChangeManager\Application.cs" />

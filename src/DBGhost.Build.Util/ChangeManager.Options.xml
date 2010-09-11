@@ -31,9 +31,7 @@ CompareAndCreateDelta: Looks for differences and creates a SQL Delta of the diff
 
 BuildDatabaseAndCompareAndCreateDelta: Builds the source database and checks the target database for differences, creating a SQL Delta of the differences.
 
-CopyDatabase: Creates a copy of a database on a server.
-
-GenerateXmlReport: Creates an xml report from a text report.]]>
+CopyDatabase: Creates a copy of a database on a server.]]>
   </option>
   <option name="applicationPath">
     <![CDATA[The path to the change manager command line application. The default is C:\Program Files\DB Ghost\ChangeManagerCmd.exe.]]>

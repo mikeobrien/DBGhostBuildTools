@@ -18,8 +18,7 @@ namespace DbGhost.Build.ChangeManager
             CompareOnly,
             CompareAndSynchronize,
             CompareAndCreateDelta,
-            CopyDatabase,
-            GenerateXmlReport
+            CopyDatabase
         }
 
         private const string DefaultAppPath32 = @"C:\Program Files\DB Ghost\ChangeManagerCmd.exe";
