@@ -8,11 +8,12 @@ namespace DbGhost.Build.Util
     {
         // ────────────────────────── Public Members ──────────────────────────
 
-        public void Run(string[] args)
+        public bool Run(string[] args)
         {
             Console.WriteLine("DB Ghost Build Utility - {0}", Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine();
 
+            var result = true;
             var options = new Options();
             Initialization.Options.Load(Environment.CommandLine, options);
 
@@ -28,7 +29,7 @@ namespace DbGhost.Build.Util
                 switch (options.Module.ToLower())
                 {
                     case "changemanager" :
-                        RunChangeManager();
+                        result = RunChangeManager();
                         break;
                     default: 
                         Console.WriteLine("Error: Invalid module.");
@@ -37,17 +38,19 @@ namespace DbGhost.Build.Util
             }
 
             Console.WriteLine();
+            return result;
         }
 
         // ────────────────────────── Private Members ──────────────────────────
 
-        private static void RunChangeManager()
+        private static bool RunChangeManager()
         {
             var options = new ChangeManager.Options();
             Initialization.Options.Load(Environment.CommandLine, options);
             var application = new Application(GetChangeManagerParameters(options));
-            if (!application.Run())
-                Console.WriteLine("DBGhost Change Manager encountered and error. View the log for more information.");
+            var result = application.Run();
+            if (!result) Console.WriteLine("DBGhost Change Manager encountered and error. View the log for more information.");
+            return result;
         }
 
         private static Parameters GetChangeManagerParameters(ChangeManager.Options options)

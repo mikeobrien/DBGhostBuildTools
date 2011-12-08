@@ -2,9 +2,9 @@
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            new Runtime().Run(args);
+            return new Runtime().Run(args) ? 0 : 1;
         }
     }
 }
