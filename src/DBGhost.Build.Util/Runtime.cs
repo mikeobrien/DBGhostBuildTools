@@ -61,7 +61,6 @@ namespace DbGhost.Build.Util
             parameters.ArtifactsDirectory = options.ArtifactsFolder;
             parameters.BuildDatabaseTemplateName = options.BuildDatabaseTemplateName;
             parameters.BuildDatabaseTemplateScript = options.BuildDatabaseTemplateScript;
-            parameters.BuildDatabaseNoTemplate = options.BuildDatabaseNoTemplate;
             parameters.BuildScriptPath = options.BuildFilePath;
             parameters.CompareDeltaScriptPath = options.DeltaFilePath;
             parameters.ConfigurationPath = options.ConfigurationPath;

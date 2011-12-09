@@ -136,11 +136,6 @@ namespace DbGhost.Build.NAnt.ChangeManager
         { get { return _parameters.BuildDatabaseTemplateName; }
             set { _parameters.BuildDatabaseTemplateName = value; } }
 
-        [TaskAttribute("buildDatabaseNoTemplate", Required = false)]
-        public string BuildDatabaseNoTemplate
-        { get { return _parameters.BuildDatabaseNoTemplate; }
-            set { _parameters.BuildDatabaseNoTemplate = value; } }
-
         // Compare Source Database Parameters
 
         [TaskAttribute("compareSourceDatabaseName", Required = false)]

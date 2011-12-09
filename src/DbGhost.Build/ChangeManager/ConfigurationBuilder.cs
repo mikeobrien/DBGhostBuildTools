@@ -22,17 +22,14 @@ namespace DbGhost.Build.ChangeManager
 
         private static void EnsureCreateDatabaseScriptParameters(Parameters parameters)
         {
-            bool buildDatabaseNoTemplate;
-
-            if (!bool.TryParse(parameters.BuildDatabaseNoTemplate, out buildDatabaseNoTemplate) ||
-                !buildDatabaseNoTemplate || !string.IsNullOrEmpty(parameters.BuildDatabaseTemplateScript) ||
+            if (!string.IsNullOrEmpty(parameters.BuildDatabaseTemplateScript) ||
                 !string.IsNullOrEmpty(parameters.BuildDatabaseTemplateName) ||
-                (((parameters.ProcessMode != Parameters.ProcessType.BuildDatabase &&
-                   parameters.ProcessMode != Parameters.ProcessType.BuildDatabaseAndCompare) &&
-                   parameters.ProcessMode != Parameters.ProcessType.BuildDatabaseAndCompareAndCreateDelta) &&
-                   parameters.ProcessMode != Parameters.ProcessType.BuildDatabaseAndCompareAndSynchronize)) return;
+                (parameters.ProcessMode != Parameters.ProcessType.BuildDatabase &&
+                 parameters.ProcessMode != Parameters.ProcessType.BuildDatabaseAndCompare) &&
+                 parameters.ProcessMode != Parameters.ProcessType.BuildDatabaseAndCompareAndCreateDelta &&
+                 parameters.ProcessMode != Parameters.ProcessType.BuildDatabaseAndCompareAndSynchronize) return;
 
-            var name = Guid.NewGuid().ToString();
+            var name = parameters.BuildDatabase.Name = parameters.BuildDatabase.Name ?? Guid.NewGuid().ToString();
             var path = name.EnsureAbsolutePath(parameters.ArtifactsDirectory);
             parameters.BuildDatabaseTemplateScript = path;
             parameters.CompareSourceDatabase.Name = name;
@@ -96,7 +93,7 @@ namespace DbGhost.Build.ChangeManager
             configuration.BuildTemplateDatabaseAuthenticationMode =
                 configuration.BuildTemplateDatabaseAuthenticationMode.Coalesce(parameters.BuildDatabase.Authentication);
 
-            configuration.PreserveBuildDatabase =
+            configuration.PreserveBuildDatabase = parameters.ProcessMode == Parameters.ProcessType.BuildDatabase ? "true" : 
                 configuration.PreserveBuildDatabase.CoalesceReverse(parameters.PreserveBuildDatabase);
 
             // Default the source to be the same as the build database unless it is specifically overriden

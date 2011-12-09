@@ -83,9 +83,6 @@ namespace DbGhost.Build.Util.ChangeManager
 
         [Option("buildDBTemplateName", OptionsResource, OptionsDescriptionXpath)]
         public string BuildDatabaseTemplateName { get; set; }
-
-        [Option("buildDBNoTemplate", OptionsResource, OptionsDescriptionXpath)]
-        public string BuildDatabaseNoTemplate { get; set; }
         
         // ────────────────────────── Compare Source Database Parameters ──────────────────────────
 

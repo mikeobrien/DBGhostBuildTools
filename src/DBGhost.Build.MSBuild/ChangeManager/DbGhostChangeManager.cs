@@ -117,10 +117,6 @@ namespace DbGhost.Build.MSBuild.ChangeManager
         { get { return _parameters.BuildDatabaseTemplateName; }
           set { _parameters.BuildDatabaseTemplateName = value; } }
 
-        public string BuildDatabaseNoTemplate
-        { get { return _parameters.BuildDatabaseNoTemplate; }
-          set { _parameters.BuildDatabaseNoTemplate = value; } }
-
         // ────────────────────────── Compare Source Database Parameters ──────────────────────────
 
         public string CompareSourceDatabaseName

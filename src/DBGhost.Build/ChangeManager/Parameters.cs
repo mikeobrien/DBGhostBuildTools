@@ -52,7 +52,6 @@ namespace DbGhost.Build.ChangeManager
         public string XmlReportFilePath { get; set; }
         public string BuildDatabaseTemplateName { get; set; }
         public string BuildDatabaseTemplateScript { get; set; }
-        public string BuildDatabaseNoTemplate { get; set; }
         public string PreserveBuildDatabase { get; set; }
 
         public string BuildScriptPath { get; set; }

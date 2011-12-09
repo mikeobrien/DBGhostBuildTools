@@ -53,7 +53,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAnt.Core, Version=0.86.2898.0, Culture=neutral">
+    <Reference Include="NAnt.Core, Version=0.90.3780.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\nant\NAnt.Core.dll</HintPath>
     </Reference>

@@ -35,6 +35,7 @@ namespace DbGhost.Build.ChangeManager
 
             var process = Process.Start(processInfo);
             process.WaitForExit();
+            var result = process.ExitCode == 0;
 
             // Convert the text report to xml
             if (File.Exists(configuration.ReportPath))
@@ -47,9 +48,10 @@ namespace DbGhost.Build.ChangeManager
 
                 report.Save(xmlReportPath);
 
-                return GenerateReport(configuration, xmlReportPath);
+                if (!GenerateReport(configuration, xmlReportPath)) result = false;
             }
-            return false;
+
+            return result;
         }
 
         private static bool GenerateReport(Configuration configuration, string xmlReportPath)

@@ -87,9 +87,6 @@ CopyDatabase: Creates a copy of a database on a server.]]>
   <option name="buildDBTemplateScript">
     <![CDATA[The build template database script is used to create the database.]]>
   </option>
-  <option name="buildDBNoTemplate">
-    <![CDATA[No build template is used to create the database (true|false).]]>
-  </option>
   <option name="preserveBuildDB">
     <![CDATA[Indicates whether or not the built database should be preserved or deleted when DB Ghost is finished processing.]]>
   </option>
