@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Diagnostics;
 using DbGhost.Build.Extensions;
 using DbGhost.Build.Reports;
@@ -14,7 +15,7 @@ namespace DbGhost.Build.ChangeManager
             _parameters = parameters;
         }
 
-        public bool Run()
+        public bool Run(Action<string> logAction = null)
         {
             var configuration = new ConfigurationBuilder(_parameters).Build();
 
@@ -30,14 +31,30 @@ namespace DbGhost.Build.ChangeManager
                 new ProcessStartInfo(_parameters.ApplicationPath)
                     {
                         Arguments = string.Format("\"{0}\"", configuration.ConfigurationPath),
-                        UseShellExecute = false
+                        UseShellExecute = false,
+						RedirectStandardOutput = logAction != null
                     };
 
-            var process = Process.Start(processInfo);
-            process.WaitForExit();
-            var result = process.ExitCode == 0;
+        	bool result;
+			using (Process process = Process.Start(processInfo))
+			{
+				if (logAction != null)
+				{
+					using (StreamReader reader = process.StandardOutput)
+					{
+						string line;
 
-            // Convert the text report to xml
+						while ((line = reader.ReadLine()) != null)
+						{
+							logAction(line);
+						}
+					}
+				}
+				process.WaitForExit();
+				result = process.ExitCode == 0;
+			}
+
+        	// Convert the text report to xml
             if (File.Exists(configuration.ReportPath))
             {
                 var xmlReportPath = _parameters.XmlReportFilePath.EnsureAbsolutePath(_parameters.ArtifactsDirectory);
