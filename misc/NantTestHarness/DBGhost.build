@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<project name="Default" basedir="." default="ImportDatabase">
+	<loadtasks path="..\..\src\DbGhost.Build.NAnt\bin\Debug" />
+	<target name="ImportDatabase">
+		<dbghost-changemanager
+			processType="BuildDatabase"
+			templateConfigurationPath = "${directory::get-current-directory()}\DBGhost.config"
+			artifactsDirectory = "${directory::get-current-directory()}\Artifacts"
+			configurationPath = "${directory::get-current-directory()}\Artifacts\DBGhost.config"
+			rootDirectory = "${directory::get-current-directory()}\Scripts"
+			buildDatabaseTemplateScript = "${directory::get-current-directory()}\Scripts\DropAndCreateDatabase.sql"
+			buildDatabaseName = "Initech"
+			buildDatabaseServer = "localhost"
+			buildDatabaseAuthenticationMode = "Windows"
+			preserveBuildDatabase = "false"
+			reportFile = "Report.txt"
+			xmlReportFile = "Report.xml" />
+	</target>
+</project>

@@ -4,3 +4,4 @@ bin
 _ReSharper.*
 *.user
 *.suo
+misc/NantTestHarness/Artifacts

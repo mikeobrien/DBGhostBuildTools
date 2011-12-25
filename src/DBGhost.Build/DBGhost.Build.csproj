@@ -88,6 +88,7 @@
     <Compile Include="Reports\Text\Converter.cs" />
     <Compile Include="Reports\Text\Entry.cs" />
     <Compile Include="Reports\Text\Reader.cs" />
+    <Compile Include="Result.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DropAndCreateDatabase.sql" />

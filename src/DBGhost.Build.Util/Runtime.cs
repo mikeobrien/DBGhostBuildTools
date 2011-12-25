@@ -49,8 +49,8 @@ namespace DbGhost.Build.Util
             Initialization.Options.Load(Environment.CommandLine, options);
             var application = new Application(GetChangeManagerParameters(options));
             var result = application.Run();
-            if (!result) Console.WriteLine("DBGhost Change Manager encountered and error. View the log for more information.");
-            return result;
+            if (!result.Success) Console.WriteLine("DBGhost Change Manager encountered and error. View the log for more information.");
+            return result.Success;
         }
 
         private static Parameters GetChangeManagerParameters(ChangeManager.Options options)

@@ -173,7 +173,7 @@ namespace DbGhost.Build.MSBuild.ChangeManager
         {
             try
             {
-                Error = !(new Application(_parameters).Run());
+                Error = !(new Application(_parameters).Run().Success);
                 return true;
             } catch (Exception exception)
             {

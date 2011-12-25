@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
 using DbGhost.Build.ChangeManager;
 using NAnt.Core;
 using NAnt.Core.Attributes;
@@ -10,7 +10,6 @@ namespace DbGhost.Build.NAnt.ChangeManager
     public class Task : global::NAnt.Core.Task
     {
         private readonly Parameters _parameters = new Parameters();
-		private readonly Regex _pattern = new Regex(@"[a-zA-Z]+", RegexOptions.Compiled);
 
         // Basic Parameters
 
@@ -205,24 +204,21 @@ namespace DbGhost.Build.NAnt.ChangeManager
 
         protected override void ExecuteTask()
         {
-            var application = new Application(_parameters);
-            if (!application.Run(LogEntry))
+            var result = new Application(_parameters).Run();
+
+            result.Output
+                  .SplitLines()
+                  .Where(x => x.Contains("..."))
+                  .Select(x => x.Split(2, "...").Last())
+                  .Where(x => x.ContainsAlpha())
+                  .ToList().ForEach(x => Log(Level.Info, x));
+
+            if (!result.Success)
             {
                 if (ResultProperty != null) Properties[ResultProperty] = "1";
                 throw new BuildException("DBGhost Change Manager encountered an error. View the log for more information.");
             }
             if (ResultProperty != null) Properties[ResultProperty] = "0";
         }
-
-		private void LogEntry(string line)
-		{
-			int index = line.IndexOf("...");
-			int divider = index + 3;
-
-			if (index > 0 && _pattern.IsMatch(line, divider))
-			{
-				Log(Level.Info, line.Substring(divider));
-			}
-		}
     }
 }

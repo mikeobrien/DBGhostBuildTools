@@ -1,11 +1,29 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DbGhost.Build.Extensions
 {
     public static class StringExtensions
     {
+        public static string[] Split(this string value, int limit, params string[] args)
+        {
+            return value.Split(args, StringSplitOptions.None);
+        }
+
+        public static string[] SplitLines(this string value)
+        {
+            return value.Split(new[] { "\r\n" }, StringSplitOptions.None);
+        }
+
+        private readonly static Regex ContainsAlphaRegex = new Regex(@"[a-zA-Z]+", RegexOptions.Compiled);
+
+        public static bool ContainsAlpha(this string value)
+        {
+            return ContainsAlphaRegex.IsMatch(value);
+        }
+
         public static bool StartsWithAny(this string value, StringComparison comparisonType, params string[] values)
         {
             return value != null && values.Any(comparand => value.StartsWith(comparand, comparisonType));

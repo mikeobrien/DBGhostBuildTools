@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Diagnostics;
 using DbGhost.Build.Extensions;
 using DbGhost.Build.Reports;
@@ -15,7 +14,7 @@ namespace DbGhost.Build.ChangeManager
             _parameters = parameters;
         }
 
-        public bool Run(Action<string> logAction = null)
+        public ProcessResult Run()
         {
             var configuration = new ConfigurationBuilder(_parameters).Build();
 
@@ -32,28 +31,18 @@ namespace DbGhost.Build.ChangeManager
                     {
                         Arguments = string.Format("\"{0}\"", configuration.ConfigurationPath),
                         UseShellExecute = false,
-						RedirectStandardOutput = logAction != null
+						RedirectStandardOutput = true
                     };
 
         	bool result;
-			using (Process process = Process.Start(processInfo))
+            string output;
+			using (var process = Process.Start(processInfo))
 			{
-				if (logAction != null)
-				{
-					using (StreamReader reader = process.StandardOutput)
-					{
-						string line;
-
-						while ((line = reader.ReadLine()) != null)
-						{
-							logAction(line);
-						}
-					}
-				}
+			    output = process.StandardOutput.ReadToEnd();
 				process.WaitForExit();
 				result = process.ExitCode == 0;
 			}
-
+            
         	// Convert the text report to xml
             if (File.Exists(configuration.ReportPath))
             {
@@ -68,7 +57,7 @@ namespace DbGhost.Build.ChangeManager
                 if (!GenerateReport(configuration, xmlReportPath)) result = false;
             }
 
-            return result;
+            return new ProcessResult { Success = result, Output = output };
         }
 
         private static bool GenerateReport(Configuration configuration, string xmlReportPath)
